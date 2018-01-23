@@ -1,42 +1,28 @@
 var $posts = $(".posts");
+var posts = [];
+var Post = function () {};
 
-var Post = function () {
-    this.posts = [];
-}
-
-Post.prototype.addPost = function (name, text) {
-    var loc = new Location();
-    var currLocation = loc._getLocation();
-
-    var currPost = {name: name, text:text, location: currLocation};
+Post.prototype.addPost = function (name, text,loc) {
+/*     var currLocation = JSON.parse(loc); */
+    var currPost = {name: name, text:text, location: loc};
 
     $.ajax({
       method: "POST",
       data: currPost,
       url: "posts",
+      scriptCharset: "jsonp",
       success: function (data) {
-        this.posts.push(data);
-        this._renderPosts();
+        console.log(data);
+        posts.push(data); 
+        _renderPosts();
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log(textStatus);
       }
     });
-
 }
 
-var Location = function(){
-    this.location = {};
-}
-
-Location.prototype._getLocation = function(){
-    /*calling the api - ajax req*/
-    var tempLong = 32;
-    var tempLat = 34;
-    return {longt:tempLong, lat:tempLat}
-}
-
-Post.prototype._renderPosts = function () {
+_renderPosts = function () {
     $posts.empty();
     var source = $('#post-template').html();
     var template = Handlebars.compile(source);
@@ -47,23 +33,31 @@ Post.prototype._renderPosts = function () {
     }
 }
 
+<<<<<<< HEAD
 var app = new Post();
 /* 
+=======
+var app = new Post(); 
+
+>>>>>>> e6fa33378eda2384138dcd7915ef06dace8f27cb
 $('#addpost').on('click', function () {
     event.preventDefault();
     var currName = "Anonymous";
-    var $nameInput = $("#post-name");
-    var $textInput = $("#post-text");
+    var $nameInput = escape(document.getElementById('post-name').value);
+    var $textInput = escape(document.getElementById('post-text').value);
 
-    if ($textInput.val() === "") {
+    var latlng = marker.getPosition();
+    var location = {lng: latlng.lng(), lat: latlng.lat() }
+    console.log(location);
+    if ($textInput=== "") {
         alert("Please insert text!");
     } 
     else {
-        if ($nameInput.val() !==""){
-            currName = $nameInput.val();
+        if ($nameInput !==""){
+            currName = $nameInput;
         }
-        app.addPost(currName, $textInput.val());
-        $nameInput.val("");
-        $textInput.val("");
+        app.addPost(currName, $textInput, location);
+        $nameInput = "";
+        $textInput = "";
     }
 }); */
