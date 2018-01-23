@@ -21,34 +21,40 @@ app.use(bodyParser.urlencoded({
 }));
 
 //route to get all posts to show in view
-app.get("/", function (req, res) {
-  
-  Post.find({}).exec(function(err, post) {
-      if (err) {          
-          res.status(500).send(err);
-          return console.error(err);
-      } else {
-          // send the list of all people
-          res.status(200).send(post);          
-      }
+app.get("/posts", function (req, res) {
+
+  Post.find().exec(function (err, post) {
+    if (err) {
+      res.status(500).send(err);
+      return console.error(err);
+    } else {
+      // send the list of all people
+      res.status(200).send(post);
+    }
   });
 });
 
 //route to add a post
-app.post('/posts', function(req, res){
-  var file = req.body[0];
+app.post('/posts', function (req, res) {
+  console.log(req.body.location);
   var postObj = new Post({
-    name: file.name,
-    text: file.text,
-    location: {type: file.location.type, coordinates: [file.location.coordinates[0], file.location.coordinates[1]] }
+    name: req.body.name,
+    text: req.body.text,
+    location: {
+      type: "Point",
+      coordinates: {
+        lng: req.body.location[0],
+        lat: req.body.location[1]
+      }
+    }
   });
-  console.log(postObj);
-  postObj.save(function (err, post){
+
+  postObj.save(function (err, post) {
     if (err) {
-      console.log(err);
+      return console.error(err);
     }
     res.send(post);
-  })
+  });
 });
 
 //to handle deleting a post

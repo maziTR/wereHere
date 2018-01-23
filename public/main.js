@@ -1,19 +1,44 @@
 var $posts = $(".posts");
-var posts = [];
-var Post = function () {};
 
-Post.prototype.addPost = function (name, text,loc) {
-    var markerSet = [{ "name": name, "text": text, "location": { "type": "Point", "coordinates": loc }}];
-    var jsonDoc = JSON.stringify(markerSet);
+var Posts = function () {
+    this.posts = [];
+};
+
+Posts.prototype.fetch = function () {
+
+    var currThis = this;
     $.ajax({
+
+        method: "GET",
+        url: "/posts",
+        success: function (data) {
+
+            currThis.posts = data;
+            console.log("data" + data);
+            console.log("posts from fetch" + currThis.posts);
+            currThis._renderPosts();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+}
+
+Posts.prototype.addPost = function (name, text, loc) {
+
+var currPost = {name: name, text:text, location: loc};
+console.log(currPost);
+
+var currThis = this;
+$.ajax({
       method: "POST",
-      data: jsonDoc,
+      data: currPost,
       url: "/posts",
-      contentType: "application/json",
       success: function (data) {
-        console.log(data);
-        // posts.push(data); 
-        // _renderPosts();
+        console.log("server: "+ data);
+        currThis.posts.push(data); 
+        currThis._renderPosts();
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log(textStatus);
@@ -21,7 +46,7 @@ Post.prototype.addPost = function (name, text,loc) {
     });
 }
 
-_renderPosts = function () {
+Posts.prototype._renderPosts = function () {
     $posts.empty();
     var source = $('#post-template').html();
     var template = Handlebars.compile(source);
@@ -32,8 +57,11 @@ _renderPosts = function () {
     }
 }
 
-var app = new Post(); 
+var app = new Posts();
+app.fetch();
 
+
+//events
 $('#addpost').on('click', function () {
     event.preventDefault();
     var currName = "Anonymous";
@@ -41,17 +69,20 @@ $('#addpost').on('click', function () {
     var $textInput = escape(document.getElementById('post-text').value);
 
     var latlng = marker.getPosition();
-    var location = [lat = latlng.lat(), lng = latlng.lng() ]
-    console.log(location);
+    var location = [];
+
+    location.push(latlng.lat());
+    location.push(latlng.lng());
+
     if ($textInput=== "") {
         alert("Please insert text!");
-    } 
+    }
     else {
-        if ($('#post-name').val() === ""){
-            $nameInput = currName;
+        if ($nameInput !== ""){
+            currName = $nameInput;
         }
-        app.addPost($nameInput, $textInput, location);
-        $('#post-name').val('');
-        $('#post-text').val('');
+        app.addPost(currName, $textInput, location);
+        $nameInput = "";
+        $textInput = "";
     }
 });
