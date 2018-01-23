@@ -12,8 +12,8 @@
 // });
 
 var locationSchema = new Schema({
-  longt: Number,
-  lat: Number    
+  lng: Object,
+  lat: Object
 });
 
   var postSchema = new Schema({
@@ -25,7 +25,7 @@ var locationSchema = new Schema({
 var Post = mongoose.model('Post', postSchema);  
  
 //tests
-/*var david = new Post({ name: "David", text: "David's post", location:{ longt: 32.050556, lat: 34.767082} });
+/* var david = new Post({ name: "David", text: "David's post", location:{ longt: 32.050556, lat: 34.767082} });
 console.log(david);
 
 david.save();
@@ -43,6 +43,6 @@ lina.save();
 Post.find(function (error, result){
   if(error) { return console.error(error); }
   console.log (result);
-});*/
+}); */
 
 module.exports = Post; 

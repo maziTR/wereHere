@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
 //route to get all posts to show in view
 app.get("/posts", function (req, res) {
   
-  Post.find().exec(function(err, post) {
+  Post.find({}).exec(function(err, post) {
       if (err) {          
           res.status(500).send(err);
           return console.error(err);
@@ -36,7 +36,7 @@ app.get("/posts", function (req, res) {
 
 //route to add a post
 app.post('/posts', function(req, res){
-  
+  console.log(req.body);
   var postObj = new Post({
       name: req.body.name,
       text: req.body.text,
@@ -46,12 +46,12 @@ app.post('/posts', function(req, res){
       if (err) { 
           console.log(err);
       }
-      res.json(201, post);
+      res.send(post);
     });    
 });
 
 //to handle deleting a post
-app.delete('/posts/:id', function (req, res) {
+/* app.delete('/posts/:id', function (req, res) {
   Post.findByIdAndRemove(req.params.id, function (err, post) {
     if (err) {
       res.send(err);
@@ -59,7 +59,7 @@ app.delete('/posts/:id', function (req, res) {
     }
     res.send(post);
   });
-});
+}); */
 
 /*
 //handle adding a comment to a post

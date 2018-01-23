@@ -27,11 +27,11 @@ function initMap() {
     });
 }
 
-function saveData() {
+/* function saveData() {
     var name = escape(document.getElementById('post-name').value);
     var text = escape(document.getElementById('text').value);
     var latlng = marker.getPosition();
-};
+}; */
     //////// CHANGE TO MONGODB + AJAX
 
     /* var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
