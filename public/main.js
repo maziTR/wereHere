@@ -48,7 +48,7 @@ Post.prototype._renderPosts = function () {
 }
 
 var app = new Post();
-
+/* 
 $('#addpost').on('click', function () {
     event.preventDefault();
     var currName = "Anonymous";
@@ -66,4 +66,4 @@ $('#addpost').on('click', function () {
         $nameInput.val("");
         $textInput.val("");
     }
-});
+}); */
