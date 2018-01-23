@@ -1,28 +1,48 @@
-/* var mongoose = require('mongoose');
+ var mongoose = require('mongoose');
+ var Schema = mongoose.Schema;
 
-var commentSchema = new mongoose.Schema({
+ //only for test
+//  mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost/wereHereDB', {
+//   useMongoClient: true
+// }, function (err, db) {
+//   if (err) {
+//     return console.error(err);
+//   }
+//   console.log("DB connection established!");
+// });
+
+var locationSchema = new Schema({
+  longt: Number,
+  lat: Number    
+});
+
+  var postSchema = new Schema({
+    name: String,
     text: String,
-    user: String
+    location: locationSchema   
   });
-  
-  var postSchema = new mongoose.Schema({
-    text: String,
-    comments: [commentSchema]
-  });
-
-var Post = mongoose.model('Post', postSchema); */
-
+ 
+var Post = mongoose.model('Post', postSchema);  
+ 
 //tests
+/*var david = new Post({ name: "David", text: "David's post", location:{ longt: 32.050556, lat: 34.767082} });
+console.log(david);
 
-/* var posti = new Post({ text: 'I am a lovely post', user: 'Sholman', comments: [] });
-posti.comments.push({ user: "Sherman", text: "Lovely Post indeed!" });
+david.save();
 
-posti.save(function(err, data) {
-    if (err) { return console.error(err); }
-    console.log(data);
-});   */
+var mika = new Post({ name: "mika", text: "mika's post", location:{ longt: 32.027442, lat: 34.751203} });
+console.log(mika);
 
-/* must have!!
-var Post = mongoose.model('post', postSchema)
+mika.save();
 
-module.exports = Post; */
+var lina = new Post({ name: "lina", text: "lina's post", location:{ longt: 31.874228, lat: 34.809439} });
+console.log(lina);
+
+lina.save();
+
+Post.find(function (error, result){
+  if(error) { return console.error(error); }
+  console.log (result);
+});*/
+
+module.exports = Post; 
