@@ -37,11 +37,11 @@ app.get("/posts", function (req, res) {
 //route to add a post
 app.post('/posts', function(req, res){
   console.log(req.body);
-  var postObj = new Post({
+/*   var postObj = new Post({
       name: req.body.name,
       text: req.body.text,
       location: req.body.location
-  });
+  }); */
   postObj.save(function (err, post) {
       if (err) { 
           console.log(err);
