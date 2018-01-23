@@ -2,14 +2,73 @@
 <html>
 
 <head>
-    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <title></title>
 </head>
-
 <body>
     <h1>works</h1>
-<!--     <div class="container">
+    <div id="map"></div>
+    <div id="form">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input type='text' id='name' /> </td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>
+                    <input type='text' id='address' /> </td>
+            </tr>
+            <tr>
+                <td>Type:</td>
+                <td>
+                    <select id='type'> +
+                        <option value='bar' SELECTED>bar</option>
+                        <option value='restaurant'>restaurant</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type='button' value='Save' onclick='saveData()' />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>    
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>    
+    <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSux_Xs8wpmGgxS9DVmT0lzu0gJF8Brg0&callback=initMap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="page-header">
+                    <h1>Were here</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="posts-container">
+                    <div class="posts"></div>
+                    <form class="post-form">
+                        <h3>Add a New Post</h3>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="post-name" placeholder="Name" />
+                            <input class="form-control" type="text" id="post-text" placeholder="Write some thing about this location to the world" />
+                        </div>
+                        <button type="button" id="addpost" class="btn btn-primary">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="page-header">
@@ -26,7 +85,13 @@
             </div>
         </div>
     </div> -->
-<!--     <script id="post-template" type="text/x-handlebars-template">
+    <script id="post-template" type="text/x-handlebars-template">
+        <div class="post well well-sm" data-id="{{_id}}"> {{name}} - {{text}}
+            <button type="button" class="btn btn-danger remove-post">X</button>
+        </div>
+    </script>
+    <!--  
+              <script id="post-template" type="text/x-handlebars-template">
         <div class="post well well-sm" data-id="{{_id}}"> {{text}}
             <a class="toggle-comments" href="#"> Comments </a>
             <button type="button" class="btn btn-danger remove-post">Remove Post</button>
@@ -38,13 +103,7 @@
             </div>
         </div>
     </script>
-    <script id="comment-template" type="text/x-handlebars-template">
-        <li class="comment">{{user}} - {{text}}
-            <button type="button" class="btn btn-sm btn-danger remove-comment">X</button>
-        </li>
-    </script> -->
-    <script src="jquery/dist/jquery.js"></script>
-    <script src="handlebars/dist/handlebars.js"></script>
+    <script src="../models/googleAPIclient.js"></script>
     <script src="main.js"></script>
 </body>
 
