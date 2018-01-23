@@ -8,8 +8,31 @@
 </head>
 
 <body>
-    <h1>works</h1>
-<!--     <div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="page-header">
+                    <h1>Were here</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="posts-container">
+                    <div class="posts"></div>
+                    <form class="post-form">
+                        <h3>Add a New Post</h3>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="post-name" placeholder="Name" />
+                            <input class="form-control" type="text" id="post-text" placeholder="Write some thing about this location to the world" />
+                        </div>
+                        <button type="button" id="addpost" class="btn btn-primary">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="page-header">
@@ -26,7 +49,13 @@
             </div>
         </div>
     </div> -->
-<!--     <script id="post-template" type="text/x-handlebars-template">
+    <script id="post-template" type="text/x-handlebars-template">
+        <div class="post well well-sm" data-id="{{_id}}"> {{name}} - {{text}}
+            <button type="button" class="btn btn-danger remove-post">X</button>
+        </div>
+    </script>
+    <!--  
+              <script id="post-template" type="text/x-handlebars-template">
         <div class="post well well-sm" data-id="{{_id}}"> {{text}}
             <a class="toggle-comments" href="#"> Comments </a>
             <button type="button" class="btn btn-danger remove-post">Remove Post</button>
