@@ -8,6 +8,7 @@
     <link href="style.css" rel="stylesheet">
     <title></title>
 </head>
+
 <body>
     <h1>works</h1>
     <div id="map"></div>
@@ -40,10 +41,6 @@
             </tr>
         </table>
     </div>
-    <script src="../node_modules/jquery/dist/jquery.js"></script>    
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>    
-    <script src="../node_modules/handlebars/dist/handlebars.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSux_Xs8wpmGgxS9DVmT0lzu0gJF8Brg0&callback=initMap">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
@@ -68,41 +65,11 @@
             </div>
         </div>
     </div>
-    <!--     <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="page-header">
-                    <h1>Spacebook</h1>
-                </div>
-                <div class="posts"></div>
-                <form class="post-form">
-                    <h3>Add a New Post</h3>
-                    <div class="form-group">
-                        <input class="form-control" type="text" id="postText" placeholder="Enter Post Text" />
-                    </div>
-                    <button type="button" id="addpost" class="btn btn-primary">Post</button>
-                </form>
-            </div>
-        </div>
-    </div> -->
-    <script id="post-template" type="text/x-handlebars-template">
-        <div class="post well well-sm" data-id="{{_id}}"> {{name}} - {{text}}
-            <button type="button" class="btn btn-danger remove-post">X</button>
-        </div>
     </script>
-    <!--  
-              <script id="post-template" type="text/x-handlebars-template">
-        <div class="post well well-sm" data-id="{{_id}}"> {{text}}
-            <a class="toggle-comments" href="#"> Comments </a>
-            <button type="button" class="btn btn-danger remove-post">Remove Post</button>
-            <div class="comments-container">
-                <ul class="comments-list"></ul>
-                <input class="form-control name" type="text" placeholder="Name" />
-                <input class="form-control comment" type="text" placeholder="Comment" />
-                <button type="button" class="btn btn-sm btn-primary add-comment">Post Comment</button>
-            </div>
-        </div>
-    </script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSux_Xs8wpmGgxS9DVmT0lzu0gJF8Brg0&callback=initMap"></script>
     <script src="../models/googleAPIclient.js"></script>
     <script src="main.js"></script>
 </body>
