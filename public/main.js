@@ -3,17 +3,17 @@ var posts = [];
 var Post = function () {};
 
 Post.prototype.addPost = function (name, text,loc) {
-    var doc = [{ "name": name, "text": text, "loc": { "type": "Point", "coordinates": loc }}];
-    
+    var markerSet = [{ "name": name, "text": text, "location": { "type": "Point", "coordinates": loc }}];
+    var jsonDoc = JSON.stringify(markerSet);
     $.ajax({
       method: "POST",
-      data: doc,
+      data: jsonDoc,
       url: "/posts",
       contentType: "application/json",
       success: function (data) {
         console.log(data);
-        posts.push(data); 
-        _renderPosts();
+        // posts.push(data); 
+        // _renderPosts();
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log(textStatus);
@@ -47,11 +47,11 @@ $('#addpost').on('click', function () {
         alert("Please insert text!");
     } 
     else {
-        if ($nameInput !== ""){
+        if ($('#post-name').val() === ""){
             $nameInput = currName;
         }
         app.addPost($nameInput, $textInput, location);
-        $nameInput = "";
-        $textInput = "";
+        $('#post-name').val('');
+        $('#post-text').val('');
     }
 });

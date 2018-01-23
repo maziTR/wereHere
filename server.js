@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //route to get all posts to show in view
-app.get("/posts", function (req, res) {
+app.get("/", function (req, res) {
   
   Post.find({}).exec(function(err, post) {
       if (err) {          
@@ -36,18 +36,19 @@ app.get("/posts", function (req, res) {
 
 //route to add a post
 app.post('/posts', function(req, res){
-  console.log(req.body);
-/*   var postObj = new Post({
-      name: req.body.name,
-      text: req.body.text,
-      location: req.body.location
-  }); */
-  postObj.save(function (err, post) {
-      if (err) { 
-          console.log(err);
-      }
-      res.send(post);
-    });    
+  var file = req.body[0];
+  var postObj = new Post({
+    name: file.name,
+    text: file.text,
+    location: {type: file.location.type, coordinates: [file.location.coordinates[0], file.location.coordinates[1]] }
+  });
+  console.log(postObj);
+  postObj.save(function (err, post){
+    if (err) {
+      console.log(err);
+    }
+    res.send(post);
+  })
 });
 
 //to handle deleting a post
