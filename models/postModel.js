@@ -11,19 +11,23 @@
 //   console.log("DB connection established!");
 // });
 
+var coordinatesSchema = new Schema({
+  lat: Object,
+  lng: Object
+});
+
 var locationSchema = new Schema({
-  lat: String,
-  lng: String
+  type: String,
+  coordinates: [coordinatesSchema]
 });
 
   var postSchema = new Schema({
     name: String,
     text: String,
-    location: locationSchema   
+    location: [locationSchema]   
   });
  
 var Post = mongoose.model('Post', postSchema);  
- 
 //tests
 /* var david = new Post({ name: "David", text: "David's post", location:{ longt: 32.050556, lat: 34.767082} });
 console.log(david);
