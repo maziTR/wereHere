@@ -1,101 +1,69 @@
-// /* 
-// es5 class example
+var $posts = $(".posts");
 
-// var Office = function () {
-//     this.documents = [];
-//     this.managers = [];
-//     this.cleaners = [];
-// }
+var Post = function () {
+    this.posts = [];
+}
 
-// Office.prototype.hireCleaner = function (name) {
-//     var currCleaner = new Cleaner();
-//     currCleaner.name = name;
-//     this.cleaners.push(currCleaner);
-// }
+Post.prototype.addPost = function (name, text) {
+    var loc = new Location();
+    var currLocation = loc._getLocation();
 
-// */
+    var currPost = {name: name, text:text, location: currLocation};
 
-// var wereHere = function () {
+    $.ajax({
+      method: "POST",
+      data: currPost,
+      url: "posts",
+      success: function (data) {
+        this.posts.push(data);
+        this._renderPosts();
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+          console.log(textStatus);
+      }
+    });
 
-//     var posts = [];
+}
 
-//     var $posts = $(".posts");
+var Location = function(){
+    this.location = {};
+}
 
-//     // _getData();
-//     // _renderPosts();
+Location.prototype._getLocation = function(){
+    /*calling the api - ajax req*/
+    var tempLong = 32;
+    var tempLat = 34;
+    return {longt:tempLong, lat:tempLat}
+}
 
-//     //get api
-//     function _getData() {
-//         $.ajax({
-//             method: "GET",
-//             url: "posts",
-//             success: function (data) {
-//                 _saveDB(data);
-//             },
-//             error: function (jqXHR, textStatus, errorThrown) {
-//                 console.log(textStatus);
-//             }
-//         });
-//     };
+Post.prototype._renderPosts = function () {
+    $posts.empty();
+    var source = $('#post-template').html();
+    var template = Handlebars.compile(source);
+    for (var i = 0; i < this.posts.length; i++) {
+        var newHTML = template(this.posts[i]);
+        $posts.append(newHTML);
+        /* _renderComments(i) */
+    }
+}
 
-//     //db 
+var app = new Post();
 
-//     function _saveDB(data) {
-//         if (data !== null) {
-//             posts = data;
-//         }
-//         _renderPosts();
-//     }
+$('#addpost').on('click', function () {
+    event.preventDefault();
+    var currName = "Anonymous";
+    var $nameInput = $("#post-name");
+    var $textInput = $("#post-text");
 
-//     function _renderPosts() {
-//         $posts.empty();
-//         var source = $('#post-template').html();
-//         var template = Handlebars.compile(source);
-//         for (var i = 0; i < posts.length; i++) {
-//             var newHTML = template(posts[i]);
-//             $posts.append(newHTML);
-//             _renderComments(i)
-//         }
-//     }
-
-//     /*     function addPost(newPost) {
-//             var currPost = { text: newPost };
-//             $.ajax({
-//                 method: "POST",
-//                 data: currPost,
-//                 url: "posts",
-//                 success: function (data) {
-//                     posts.push(data);
-//                     _renderPosts();
-//                 },
-//                 error: function (jqXHR, textStatus, errorThrown) {
-//                     console.log(textStatus);
-//                 }
-//             });
-//         } */
-
-//     var removePost = function (id, index) {
-//         /*         var url = "posts/" + id;
-//                 $.ajax({
-//                     method: "DELETE",
-//                     url: url,
-//                     success: function (data) {
-//                         posts.splice(index, 1);
-//                         _getData();
-//                         _renderPosts();
-//                     },
-//                     error: function (jqXHR, textStatus, errorThrown) {
-//                         console.log(textStatus);
-//                     }
-//                 });
-//             }; */
-
-//         return {
-//             addPost: addPost,
-//             removePost: removePost,
-//         }
-//     }
-// };
-
-// var app = wereHere();
-
+    if ($textInput.val() === "") {
+        alert("Please insert text!");
+    } 
+    else {
+        if ($nameInput.val() !==""){
+            currName = $nameInput.val();
+        }
+        app.addPost(currName, $textInput.val());
+        $nameInput.val("");
+        $textInput.val("");
+    }
+});
