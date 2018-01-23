@@ -1,0 +1,29 @@
+{
+  "name": "spacebook-c2",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maziTR/spacebook-fullstack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swinston1000/spacebook-c2/issues"
+  },
+  "homepage": "https://github.com/swinston1000/spacebook-c2#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "mongoose": "^4.13.9"
+  },
+  "description": ""
+}

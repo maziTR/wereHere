@@ -1,0 +1,21 @@
+body{
+    background: url(img/bg.jpg) no-repeat , #ffffff;
+    background-size: 500%;
+    background-position: center;
+}
+
+ul li {
+    list-style: none;
+}
+
+.btn-sm {
+    margin: 5px 5px 5px 0;
+}
+
+.btn-danger {
+    margin: 5px 0 5px 10px;
+}
+
+.comments-container {
+    display: none;
+}
