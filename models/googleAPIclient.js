@@ -28,9 +28,8 @@ function initMap() {
 }
 
 function saveData() {
-    var name = escape(document.getElementById('name').value);
-    var address = escape(document.getElementById('address').value);
-    var type = document.getElementById('type').value;
+    var name = escape(document.getElementById('post-name').value);
+    var text = escape(document.getElementById('text').value);
     var latlng = marker.getPosition();
 };
     //////// CHANGE TO MONGODB + AJAX
