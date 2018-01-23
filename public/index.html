@@ -10,37 +10,6 @@
 </head>
 
 <body>
-    <h1>works</h1>
-    <div id="map"></div>
-    <div id="form">
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td>
-                    <input type='text' id='name' /> </td>
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td>
-                    <input type='text' id='address' /> </td>
-            </tr>
-            <tr>
-                <td>Type:</td>
-                <td>
-                    <select id='type'> +
-                        <option value='bar' SELECTED>bar</option>
-                        <option value='restaurant'>restaurant</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type='button' value='Save' onclick='saveData()' />
-                </td>
-            </tr>
-        </table>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
@@ -53,9 +22,10 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="posts-container">
                     <div class="posts"></div>
+                    <div id="map"></div>
                     <form class="post-form">
                         <h3>Add a New Post</h3>
-                        <div class="form-group">
+                        <div class="form-group" id="form">
                             <input class="form-control" type="text" id="post-name" placeholder="Name" />
                             <input class="form-control" type="text" id="post-text" placeholder="Write some thing about this location to the world" />
                         </div>
