@@ -1,8 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var Post = require('./models/postModel');
 
-mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost/spacebookDB', {
+mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost/wereHereDB', {
   useMongoClient: true
 }, function (err, db) {
   if (err) {
@@ -10,8 +11,6 @@ mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost/spacebook
   }
   console.log("DB connection established!");
 });
-
-var Post = require('./models/postModel');
 
 var app = express();
 app.use(express.static('public'));
@@ -21,32 +20,34 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-//handle getting all posts and their comments
-/* 
-app.get('/posts', function (req, res) {
-  Post.find(function (err, post) {
-    if (err) {
-      res.send(err);
-      return console.error(err);
-    }
-    res.send(post);
-  })
+//route to get all posts to show in view
+app.get("/posts", function (req, res) {
+  
+  Post.find().exec(function(err, post) {
+      if (err) {          
+          res.status(500).send(err);
+          return console.error(err);
+      } else {
+          // send the list of all people
+          res.status(200).send(post);          
+      }
+  });
 });
 
-//handle adding a post
-app.post('/posts', function (req, res) {
-  var posti = new Post({
-    text: req.body.text,
-    comments: []
+//route to add a post
+app.post('/posts', function(req, res){
+  
+  var postObj = new Post({
+      name: req.body.name,
+      text: req.body.text,
+      location: req.body.location
   });
-
-  posti.save(function (err, post) {
-    if (err) {
-      res.send(err);
-      return console.error(err);
-    }
-    res.send(post);
-  });
+  postObj.save(function (err, post) {
+      if (err) { 
+          console.log(err);
+      }
+      res.json(201, post);
+    });    
 });
 
 //to handle deleting a post
@@ -60,6 +61,7 @@ app.delete('/posts/:id', function (req, res) {
   });
 });
 
+/*
 //handle adding a comment to a post
 app.post('/posts/:id/comments', function (req, res) {
   Post.findByIdAndUpdate(req.params.id, {
@@ -99,6 +101,7 @@ app.delete('/posts/:id/comments/:cId', function (req, res) {
 });
 
 */
+
 app.listen(process.env.PORT || '8080', function () {
   console.log("server alive");
 });
