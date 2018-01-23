@@ -6,16 +6,16 @@ var Posts = function () {
 
 Posts.prototype.addPost = function (name, text, loc) {
 
-var doc = { name: name, text: text, loc: { type: "Point", coordinates: loc }};
+var currPost = {name: name, text:text, location: loc};
 console.log(currPost);
+
 var currThis = this;
 $.ajax({
       method: "POST",
-      data: doc,
-      url: "posts",
-      dataType: "json",
+      data: currPost,
+      url: "/posts",
       success: function (data) {
-        console.log(data);
+        console.log("server: "+ data);
         currThis.posts.push(data); 
         currThis._renderPosts();
       },
@@ -45,16 +45,19 @@ $('#addpost').on('click', function () {
     var $textInput = escape(document.getElementById('post-text').value);
 
     var latlng = marker.getPosition();
-    var location = [lat = latlng.lat(), lng = latlng.lng() ]
-    console.log(location);
+    var location = [];
+
+    location.push(latlng.lat());
+    location.push(latlng.lng());
+
     if ($textInput=== "") {
         alert("Please insert text!");
     } 
     else {
         if ($nameInput !== ""){
-            $nameInput = currName;
+            currName = $nameInput;
         }
-        app.addPost(nameInput, $textInput, location);
+        app.addPost($nameInput, $textInput, location);
         $nameInput = "";
         $textInput = "";
     }

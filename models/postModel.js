@@ -12,8 +12,8 @@
 // });
 
 var coordinatesSchema = new Schema({
-  lat: Object,
-  lng: Object
+  lat: Number,
+  lng: Number
 });
 
 var locationSchema = new Schema({
@@ -24,7 +24,7 @@ var locationSchema = new Schema({
   var postSchema = new Schema({
     name: String,
     text: String,
-    location: [locationSchema]   
+    location: locationSchema   
   });
  
 var Post = mongoose.model('Post', postSchema);  
