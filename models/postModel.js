@@ -12,8 +12,8 @@
 // });
 
 var locationSchema = new Schema({
-  lng: Object,
-  lat: Object
+  lat: String,
+  lng: String
 });
 
   var postSchema = new Schema({

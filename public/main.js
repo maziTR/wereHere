@@ -1,20 +1,24 @@
 var $posts = $(".posts");
-var posts = [];
-var Post = function () {};
 
-Post.prototype.addPost = function (name, text,loc) {
+var Posts = function () {
+    this.posts = [];
+};
+
+Posts.prototype.addPost = function (name, text, loc) {
 /*     var currLocation = JSON.parse(loc); */
-    var currPost = {name: name, text:text, location: loc};
 
-    $.ajax({
+var currPost = {name: name, text:text, location: loc};
+console.log(currPost);
+var currThis = this;
+$.ajax({
       method: "POST",
       data: currPost,
       url: "posts",
       scriptCharset: "jsonp",
       success: function (data) {
         console.log(data);
-        posts.push(data); 
-        _renderPosts();
+        currThis.posts.push(data); 
+        currThis._renderPosts();
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log(textStatus);
@@ -22,7 +26,7 @@ Post.prototype.addPost = function (name, text,loc) {
     });
 }
 
-_renderPosts = function () {
+Posts.prototype._renderPosts = function () {
     $posts.empty();
     var source = $('#post-template').html();
     var template = Handlebars.compile(source);
@@ -33,7 +37,7 @@ _renderPosts = function () {
     }
 }
 
-var app = new Post(); 
+var app = new Posts(); 
 
 $('#addpost').on('click', function () {
     event.preventDefault();
@@ -42,7 +46,7 @@ $('#addpost').on('click', function () {
     var $textInput = escape(document.getElementById('post-text').value);
 
     var latlng = marker.getPosition();
-    var location = {lng: latlng.lng(), lat: latlng.lat() }
+    var location = {lat: latlng.lat(), lng: latlng.lng() }
     console.log(location);
     if ($textInput=== "") {
         alert("Please insert text!");
