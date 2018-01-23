@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
 //route to get all posts to show in view
 app.get("/posts", function (req, res) {
 
-  Post.find().exec(function (err, post) {
+  Post.find({}).exec(function (err, post) {
     if (err) {
       res.status(500).send(err);
       return console.error(err);

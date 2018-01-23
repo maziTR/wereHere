@@ -8,14 +8,25 @@ Posts.prototype.fetch = function () {
 
     var currThis = this;
     $.ajax({
-
         method: "GET",
         url: "/posts",
         success: function (data) {
-
-            currThis.posts = data;
-            console.log("data" + data);
-            console.log("posts from fetch" + currThis.posts);
+            console.log(data);
+            for (var i = 0, length = data.length; i < length; i++) {
+                var fetch = data[i],
+                    latLng = new google.maps.LatLng(fetch.location.coordinates[0], fetch.location.coordinates[1]); 
+              
+                // Creating a marker and putting it on the map
+                var marker = new google.maps.Marker({
+                  position: latLng,
+                  map: map,
+                  name: fetch.name,
+                  text: fetch.text,
+                });
+              }
+            // currThis.posts = data;
+            // console.log("data" + data);
+            // console.log("posts from fetch" + currThis.posts);
             currThis._renderPosts();
 
         },
