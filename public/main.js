@@ -3,13 +3,13 @@ var posts = [];
 var Post = function () {};
 
 Post.prototype.addPost = function (name, text,loc) {
-    var doc = { name: name, text: text, loc: { type: "Point", coordinates: loc }};
+    var doc = [{ "name": name, "text": text, "loc": { "type": "Point", "coordinates": loc }}];
     
     $.ajax({
       method: "POST",
       data: doc,
-      url: "posts",
-      dataType: "json",
+      url: "/posts",
+      contentType: "application/json",
       success: function (data) {
         console.log(data);
         posts.push(data); 
@@ -50,7 +50,7 @@ $('#addpost').on('click', function () {
         if ($nameInput !== ""){
             $nameInput = currName;
         }
-        app.addPost(nameInput, $textInput, location);
+        app.addPost($nameInput, $textInput, location);
         $nameInput = "";
         $textInput = "";
     }

@@ -22,7 +22,7 @@ var locationSchema = new Schema({
 
   var postSchema = new Schema({
     name: String,
-    text: String,
+    text: {type: String, required: true},
     location: [locationSchema]   
   });
  
