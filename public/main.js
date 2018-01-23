@@ -4,6 +4,27 @@ var Posts = function () {
     this.posts = [];
 };
 
+Posts.prototype.fetch = function () {
+
+    var currThis = this;
+    $.ajax({
+
+        method: "GET",
+        url: "/posts",
+        success: function (data) {
+
+            currThis.posts = data;
+            console.log("data" + data);
+            console.log("posts from fetch" + currThis.posts);
+            currThis._renderPosts();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+}
+
 Posts.prototype.addPost = function (name, text, loc) {
 
 var currPost = {name: name, text:text, location: loc};
@@ -36,8 +57,11 @@ Posts.prototype._renderPosts = function () {
     }
 }
 
-var app = new Posts(); 
+var app = new Posts();
+app.fetch();
 
+
+//events
 $('#addpost').on('click', function () {
     event.preventDefault();
     var currName = "Anonymous";
@@ -52,12 +76,12 @@ $('#addpost').on('click', function () {
 
     if ($textInput=== "") {
         alert("Please insert text!");
-    } 
+    }
     else {
         if ($nameInput !== ""){
             currName = $nameInput;
         }
-        app.addPost($nameInput, $textInput, location);
+        app.addPost(currName, $textInput, location);
         $nameInput = "";
         $textInput = "";
     }
