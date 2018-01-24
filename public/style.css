@@ -39,12 +39,13 @@ ul li {
 
 
 /*adding post form*/
-.post-form{
+.post-form {
     width: 50%;
     position: absolute;
-    background: rgb(240, 255, 255);
-    top: 12em;
-    left: 12em;
+    background: rgba(240, 255, 255, 0.51);
+    top: -24em;
+    right: 7em;
+    margin: 0 auto;
     padding: 1em;
     border-radius: 1em 0;
     display: none;
