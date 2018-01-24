@@ -10,17 +10,18 @@ function initMap() {
         zoom: 15
     })
 
-/*     infowindow = new google.maps.InfoWindow({
-        content: document.getElementById('form')
-    }); */
+    /*     infowindow = new google.maps.InfoWindow({
+            content: document.getElementById('form')
+        }); */
 
     google.maps.event.addListener(map, 'click', function (event) {
         marker = new google.maps.Marker({
             position: event.latLng,
             map: map
         });
-
-
+        infowindow = new google.maps.InfoWindow({
+            content: document.getElementById('form')
+        })
     });
 }
 
@@ -28,7 +29,7 @@ var form = document.getElementById('form').innerHTML
 
 function attachPosts(marker, post) {
     var infowindow = new google.maps.InfoWindow({
-        content: form + '<hr><h6>'+post.name+'</h6><br><p>'+post.text+'</p><br><hr>'
+        content: form + '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
     });
 
     marker.addListener('click', function () {

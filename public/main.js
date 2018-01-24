@@ -26,14 +26,13 @@ function getMarkers(res) {
 
 Posts.prototype.fetch = function () {
 
-    var currThis = app;
     $.ajax({
         method: "GET",
         url: "/posts",
         dataType: 'json',
         success: function (res) {
             getMarkers(res);
-            currThis = res;
+            app = res;
             app._renderPosts();
         },
         error: function (jqXHR, textStatus, errorThrown) {
