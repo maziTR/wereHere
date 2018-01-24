@@ -24,3 +24,21 @@ ul li {
     height: 500px;
     width: 100%;
 }
+
+.post-form{
+    width: 50%;
+    position: absolute;
+    background: rgba(240, 255, 255, 0);
+    top: 12em;
+    left: 12em;
+    padding: 1em;
+    border-radius: 1em 0;
+    display: none;
+    transition: all 1s;
+}
+
+.show{
+    background: rgb(240, 255, 255);
+    display: block;
+    transition: all 1s;
+}

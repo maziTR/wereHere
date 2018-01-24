@@ -5,20 +5,20 @@ var Posts = function () {
 };
 
 Posts.prototype.renderMarkers = function(res) {
-    for (var i = 0, len = res.length; i < len; i++) {
-        var fetch = res[i];
+    for (var i = 0; i < res.length; i++) {
+        var resource = res[i];
 
-        if (app.hasOwnProperty(fetch._id)) {
-            app[fetch._id].setPosition(new google.maps.LatLng(fetch.location.coordinates[0].lng, fetch.location.coordinates[0].lat));
+        if (this.hasOwnProperty(resource._id)) {
+            this[resource._id].setPosition(new google.maps.LatLng(resource.location.coordinates[0].lng, resource.location.coordinates[0].lat));
         } else {
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(fetch.location.coordinates[0].lng, fetch.location.coordinates[0].lat),
-                name: fetch.name,
-                text: fetch.text,
+                position: new google.maps.LatLng(resource.location.coordinates[0].lng, resource.location.coordinates[0].lat),
+                name: resource.name,
+                text: resource.text,
                 map: map,
                 clickable: true
             });
-            app[fetch._id] = marker;
+            //this[resource._id] = marker;
         }
         attachPosts(marker, res[i]);
     }
@@ -59,7 +59,11 @@ $.ajax({
       url: "/posts",
       success: function (data) {
         console.log("server: "+ data);
-        currThis.posts.push(data); 
+        
+        console.log("data" + data); 
+        currThis.posts.push(data);
+
+        currThis.renderMarkers(currThis.posts);
         currThis._renderPosts();
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -106,12 +110,12 @@ app.fetch();
 
 //events
 
-$('#addpost').on('click', function () {
+$('#addpost').on('click', function (event) {
 
     event.preventDefault();
     var currName = "Anonymous";
-    escape(document.getElementById('post-name').value);
-    escape(document.getElementById('post-text').value);
+/*     escape(document.getElementById('post-name').value);
+    escape(document.getElementById('post-text').value); */
  
     var $nameInput = $('#post-name');
     var $textInput = $('#post-text');
@@ -141,3 +145,6 @@ $(".posts").on('click', '.remove-post', function () {
     app.deletePost(index);
 });
 
+$('.btn-submit').on('click', function (event){
+    $('.post-form').removeClass('show'); 
+});

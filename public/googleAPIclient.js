@@ -19,22 +19,36 @@ function initMap() {
             position: event.latLng,
             map: map
         });
+        //when pressing on new marker 
+        marker.addListener('click', function () {
+/*             infowindow.open(marker.get('map'), marker);*/
+            if (!(infowindow)){
+                $('.post-form').addClass('show');
+            }
+            else{
+                infowindow.open(marker.get('map'), marker);
+            }
+        });
+/* 
         infowindow = new google.maps.InfoWindow({
             content: document.getElementById('form')
-        })
+        })  */
     });
-}
+    
+    }
 
 var form = document.getElementById('form').innerHTML
 
 function attachPosts(marker, post) {
+    console.log(marker);
     var infowindow = new google.maps.InfoWindow({
-        content: form + '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
+        content: '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
     });
+    //when pressing on a existing marker
 
     marker.addListener('click', function () {
         infowindow.open(marker.get('map'), marker);
-    });
+    }); 
 }
 
 
