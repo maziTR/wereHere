@@ -68,11 +68,33 @@ Posts.prototype._renderPosts = function () {
     }
 }
 
+Posts.prototype.deletePost = function (index) {
+
+    var postId = this.posts[index]._id;
+    console.log(postId);
+
+    $.ajax({
+
+        method: "DELETE",        
+        url: "/posts/" + postId,
+        success: function (data) {
+            console.log(data);
+            currThis.posts.splice(index, 1);
+            currThis.fetch();
+            currThis._renderPosts();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+}
+
 var app = new Posts();
 app.fetch();
 
-
 //events
+
+
 $('#addpost').on('click', function () {
     event.preventDefault();
     var currName = "Anonymous";
@@ -96,4 +118,18 @@ $('#addpost').on('click', function () {
         $nameInput = "";
         $textInput = "";
     }
+});
+
+
+// $(".posts").on('click', '.remove-post', function () {
+//     var index = $(this).closest('.post').index();
+//     console.log(index);
+//     app.deletePost(index);
+// });
+
+
+$('.remove-post').on('click', function () {
+    var index = $(this).closest('.post').index();
+    console.log(index);
+    app.deletePost(index);
 });
