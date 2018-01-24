@@ -7,8 +7,20 @@ function initMap() {
     var telAviv = { lat: 32.063567, lng: 34.773053 }
     map = new google.maps.Map(document.getElementById('map'), {
         center: telAviv,
-        zoom: 15
+        zoom: 15,
+        gestureHandling: 'none',
+        fullscreenControl: false,
+        zoomControl: false,
+        mapTypeControl : false,
+        minZoom: 15
+
     })
+    var bounds = new google.maps.LatLngBounds();
+
+    bounds.extend(new google.maps.LatLng('32.051772', '34.750975')); 
+    bounds.extend(new google.maps.LatLng('32.086575', '34.78994')); 
+
+    map.fitBounds(bounds);
 
     /*     infowindow = new google.maps.InfoWindow({
             content: document.getElementById('form')
