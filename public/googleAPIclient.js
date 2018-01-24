@@ -52,8 +52,4 @@ function attachPosts(marker, post) {
             infowindow.close();
             messagewindow.open(map, marker);
         }
-<<<<<<< HEAD
     })*/
-=======
-    })*/
->>>>>>> 9c72012d434becfc3a855b714fe930ff446a7192
