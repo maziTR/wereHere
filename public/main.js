@@ -65,6 +65,7 @@ $.ajax({
 
         currThis.renderMarkers(currThis.posts);
         currThis._renderPosts();
+        clicked = false;
       },
       error: function (jqXHR, textStatus, errorThrown) {
           console.log(textStatus);
@@ -96,7 +97,7 @@ Posts.prototype.deletePost = function (index) {
         success: function (data) {
             console.log(data);
             currThis.posts.splice(index, 1);
-            currThis.fetch();
+            currThis.renderMarkers(currThis.posts);
             currThis._renderPosts();
         },
         error: function (jqXHR, textStatus, errorThrown) {
