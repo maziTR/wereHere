@@ -1,8 +1,15 @@
 var $posts = $(".posts");
-
 var Posts = function () {
     this.posts = [];
 };
+
+function deleteMarker (id) {
+    for (let i = 0; i < app.posts.length; i++){
+        if (app.posts[i]._id === id){
+            app.posts[i].setMap(null);
+        }
+    }
+}
 
 Posts.prototype.renderMarkers = function(res) {
     for (var i = 0; i < res.length; i++) {
@@ -18,7 +25,8 @@ Posts.prototype.renderMarkers = function(res) {
                 map: map,
                 clickable: true
             });
-            //this[resource._id] = marker;
+            marker.id = resource._id
+            console.log(marker);
         }
         attachPosts(marker, res[i]);
     }
@@ -85,11 +93,10 @@ Posts.prototype._renderPosts = function () {
 }
 
 Posts.prototype.deletePost = function (index) {
-
     var postId = this.posts[index]._id;
     console.log(postId);
     var currThis = this;
-
+    deleteMarker(postId);
     $.ajax({
 
         method: "DELETE",        
@@ -97,7 +104,6 @@ Posts.prototype.deletePost = function (index) {
         success: function (data) {
             console.log(data);
             currThis.posts.splice(index, 1);
-            currThis.renderMarkers(currThis.posts);
             currThis._renderPosts();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -142,7 +148,6 @@ $('#addpost').on('click', function (event) {
 
 $(".posts").on('click', '.remove-post', function () {
     var index = $(this).closest('.post').index();
-    console.log(index);
     app.deletePost(index);
 });
 
