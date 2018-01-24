@@ -30,7 +30,7 @@ Posts.prototype.fetch = function () {
 Posts.prototype.addPost = function (name, text, loc) {
 
     var doc = { name: name, text: text, loc: { type: "Point", coordinates: loc } };
-    console.log(currPost);
+  
     var currThis = this;
     $.ajax({
         method: "POST",
@@ -59,11 +59,33 @@ Posts.prototype._renderPosts = function () {
     }
 }
 
+Posts.prototype.deletePost = function (index) {
+
+    var postId = this.posts[index]._id;
+    console.log(postId);
+
+    $.ajax({
+
+        method: "DELETE",        
+        url: "/posts/" + postId,
+        success: function (data) {
+            console.log(data);
+            currThis.posts.splice(index, 1);
+            currThis.fetch();
+            currThis._renderPosts();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+}
+
 var app = new Posts();
 app.fetch();
 
-
 //events
+
+
 $('#addpost').on('click', function () {
     event.preventDefault();
     var currName = "Anonymous";
@@ -80,8 +102,22 @@ $('#addpost').on('click', function () {
         if ($nameInput !== "") {
             $nameInput = currName;
         }
-        app.addPost(nameInput, $textInput, location);
+        app.addPost($nameInput, $textInput, location);
         $nameInput = "";
         $textInput = "";
     }
+});
+
+
+// $(".posts").on('click', '.remove-post', function () {
+//     var index = $(this).closest('.post').index();
+//     console.log(index);
+//     app.deletePost(index);
+// });
+
+
+$('.remove-post').on('click', function () {
+    var index = $(this).closest('.post').index();
+    console.log(index);
+    app.deletePost(index);
 });

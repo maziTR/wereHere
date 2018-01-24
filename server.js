@@ -51,7 +51,7 @@ app.post('/posts', function(req, res){
 });
 
 //to handle deleting a post
-/* app.delete('/posts/:id', function (req, res) {
+ app.delete('/posts/:id', function (req, res) {
   Post.findByIdAndRemove(req.params.id, function (err, post) {
     if (err) {
       res.send(err);
@@ -59,7 +59,7 @@ app.post('/posts', function(req, res){
     }
     res.send(post);
   });
-}); */
+}); 
 
 /*
 //handle adding a comment to a post
