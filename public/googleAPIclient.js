@@ -15,7 +15,7 @@ function initMap() {
         mapTypeControl: false,
         minZoom: 15
 
-    })
+    });
     var bounds = new google.maps.LatLngBounds();
 
     bounds.extend(new google.maps.LatLng('32.051772', '34.750975'));
@@ -57,7 +57,7 @@ function initMap() {
 
 
     function attachPosts(marker, post) {
-        console.log(marker);
+        /* console.log(marker); */
         var infowindow = new google.maps.InfoWindow({
             content: '<div class="map-marker-txts"><div class="person-name">' + post.name + '</div><div class="person-text">' + post.text + '</div></div>'
         });
