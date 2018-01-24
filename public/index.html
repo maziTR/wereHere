@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <title></title>
+    <title>Were here</title>
 </head>
 
 <body>
@@ -18,11 +18,8 @@
                 </div>
                 <div class="posts"></div>
             </div>
-            <div class="col-md-9 col-sm-9"><div id="map"></div></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                
+            <div class="col-md-9 col-sm-9">
+                <div id="map"></div>
                 <div class="posts-container">
                     <form class="post-form">
                         <h3>Add a New Post</h3>
@@ -32,30 +29,17 @@
                             <input type="submit" id="addpost" value="post" class="btn btn-primary btn-submit">
                         </div>
                     </form>
-
                 </div>
+
             </div>
         </div>
     </div>
-  
+
     <script id="post-template" type="text/x-handlebars-template">
         <div class="post well well-sm" data-id="{{_id}}"> {{name}} - {{text}}
             <button type="button" class="btn btn-danger remove-post">X</button>
         </div>
     </script>
-   
-<!--  <script id="post-template" type="text/x-handlebars-template">
-        <div class="post well well-sm" data-id="{{_id}}"> {{text}}
-            <a class="toggle-comments" href="#"> Comments </a>
-            <button type="button" class="btn btn-danger remove-post">Remove Post</button>
-            <div class="comments-container">
-                <ul class="comments-list"></ul>
-                <input class="form-control name" type="text" placeholder="Name" />
-                <input class="form-control comment" type="text" placeholder="Comment" />
-                <button type="button" class="btn btn-sm btn-primary add-comment">Post Comment</button>
-            </div>
-        </div>
-    </script> -->
 
     <script src="jquery/dist/jquery.js"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>
