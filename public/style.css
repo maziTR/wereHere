@@ -1,6 +1,7 @@
+/* general */
 body{
-    background: url(img/bg.jpg) no-repeat , #ffffff;
-    background-size: 500%;
+    background: url(img/bg.JPG) no-repeat , #ffffff;
+    background-size: cover;
     background-position: center;
 }
 
@@ -16,19 +17,32 @@ ul li {
     margin: 5px 0 5px 10px;
 }
 
-.comments-container {
-    display: none;
-}
-
+/*map*/
 #map {
     height: 500px;
     width: 100%;
+    top: 3em;
 }
 
+.map-marker-txts{
+    background: #595f53;
+    font-size:larger;
+    padding:1em;
+    color:white;
+    border-radius:0.5em 0;
+}
+
+.map-marker-txts .person-name{
+    font-size:1.6em;
+}
+
+
+
+/*adding post form*/
 .post-form{
     width: 50%;
     position: absolute;
-    background: rgba(240, 255, 255, 0);
+    background: rgb(240, 255, 255);
     top: 12em;
     left: 12em;
     padding: 1em;
@@ -37,8 +51,14 @@ ul li {
     transition: all 1s;
 }
 
+/*post div*/
+.posts {
+    max-height: 26em;
+    overflow-y: scroll;
+}
+
+/* general */
+
 .show{
-    background: rgb(240, 255, 255);
     display: block;
-    transition: all 1s;
 }
