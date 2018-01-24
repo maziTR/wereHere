@@ -4,6 +4,26 @@ var Posts = function () {
     this.posts = [];
 };
 
+Posts.prototype.renderMarkers = function(res) {
+    for (var i = 0, len = res.length; i < len; i++) {
+        var fetch = res[i];
+
+        if (app.hasOwnProperty(fetch._id)) {
+            app[fetch._id].setPosition(new google.maps.LatLng(fetch.location.coordinates[0].lng, fetch.location.coordinates[0].lat));
+        } else {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(fetch.location.coordinates[0].lng, fetch.location.coordinates[0].lat),
+                name: fetch.name,
+                text: fetch.text,
+                map: map,
+                clickable: true
+            });
+            app[fetch._id] = marker;
+        }
+        attachPosts(marker, res[i]);
+    }
+};
+
 Posts.prototype.fetch = function () {
 
     var currThis = this;
@@ -16,6 +36,8 @@ Posts.prototype.fetch = function () {
             currThis.posts = data;
             console.log("data" + data);
             console.log("posts from fetch" + currThis.posts);
+           
+            currThis.renderMarkers(data);
             currThis._renderPosts();
 
         },

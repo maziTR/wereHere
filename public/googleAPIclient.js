@@ -10,57 +10,46 @@ function initMap() {
         zoom: 15
     })
 
-    infowindow = new google.maps.InfoWindow({
-        content: document.getElementById('form')
-    });
+    /*     infowindow = new google.maps.InfoWindow({
+            content: document.getElementById('form')
+        }); */
 
     google.maps.event.addListener(map, 'click', function (event) {
         marker = new google.maps.Marker({
             position: event.latLng,
             map: map
         });
-
-
-        google.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(map, marker);
-        });
+        infowindow = new google.maps.InfoWindow({
+            content: document.getElementById('form')
+        })
     });
 }
 
-/* function saveData() {
-    var name = escape(document.getElementById('post-name').value);
-    var text = escape(document.getElementById('text').value);
-    var latlng = marker.getPosition();
-}; */
+var form = document.getElementById('form').innerHTML
+
+function attachPosts(marker, post) {
+    var infowindow = new google.maps.InfoWindow({
+        content: form + '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
+    });
+
+    marker.addListener('click', function () {
+        infowindow.open(marker.get('map'), marker);
+    });
+}
+
+
+    /* function saveData() {
+        var name = escape(document.getElementById('post-name').value);
+        var text = escape(document.getElementById('text').value);
+        var latlng = marker.getPosition();
+    }; */
     //////// CHANGE TO MONGODB + AJAX
 
     /* var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
         '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
-
     downloadUrl(url, function (data, responseCode) {
-
         if (responseCode == 200 && data.length <= 1) {
             infowindow.close();
             messagewindow.open(map, marker);
         }
-    });
-}
-
-function downloadUrl(url, callback) {
-    var request = window.ActiveXObject ?
-        new ActiveXObject('Microsoft.XMLHTTP') :
-        new XMLHttpRequest;
-
-    request.onreadystatechange = function () {
-        if (request.readyState == 4) {
-            request.onreadystatechange = doNothing;
-            callback(request.responseText, request.status);
-        }
-    };
-
-    request.open('GET', url, true);
-    request.send(null);
-} */
-/* 
-function doNothing() {
-} */
+    })*/
