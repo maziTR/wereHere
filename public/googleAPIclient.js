@@ -54,7 +54,7 @@ var form = document.getElementById('form').innerHTML
 function attachPosts(marker, post) {
     console.log(marker);
     var infowindow = new google.maps.InfoWindow({
-        content: '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
+        content: '<div class="map-marker-txts"><div class="person-name">' + post.name + '</div><div class="person-text">' + post.text + '</div></div>'
     });
     //when pressing on a existing marker
 
