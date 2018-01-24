@@ -61,6 +61,7 @@ Posts.prototype.deletePost = function (index) {
 
     var postId = this.posts[index]._id;
     console.log(postId);
+    var currThis = this;
 
     $.ajax({
 
