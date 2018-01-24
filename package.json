@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
+    "bootstrap-editable": "^1.0.1",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
     "handlebars": "^4.0.11",

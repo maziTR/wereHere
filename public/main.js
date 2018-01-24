@@ -2,16 +2,16 @@ var $posts = $(".posts");
 var Posts = function () {
     this.posts = [];
 };
-
-function deleteMarker (id) {
-    for (let i = 0; i < app.posts.length; i++){
-        if (app.posts[i]._id === id){
+$.fn.editable.defaults.ajaxOptions = { type: "PUT" }
+function deleteMarker(id) {
+    for (let i = 0; i < app.posts.length; i++) {
+        if (app.posts[i]._id === id) {
             app.posts[i].setMap(null);
         }
     }
 }
 
-Posts.prototype.renderMarkers = function(res) {
+Posts.prototype.renderMarkers = function (res) {
     for (var i = 0; i < res.length; i++) {
         var resource = res[i];
 
@@ -44,7 +44,7 @@ Posts.prototype.fetch = function () {
             currThis.posts = data;
             console.log("data" + data);
             console.log("posts from fetch" + currThis.posts);
-           
+
             currThis.renderMarkers(data);
             currThis._renderPosts();
 
@@ -57,27 +57,27 @@ Posts.prototype.fetch = function () {
 
 Posts.prototype.addPost = function (name, text, loc) {
 
-var currPost = {name: name, text:text, location: loc};
-console.log(currPost);
+    var currPost = { name: name, text: text, location: loc };
+    console.log(currPost);
 
-var currThis = this;
-$.ajax({
-      method: "POST",
-      data: currPost,
-      url: "/posts",
-      success: function (data) {
-        console.log("server: "+ data);
-        
-        console.log("data" + data); 
-        currThis.posts.push(data);
+    var currThis = this;
+    $.ajax({
+        method: "POST",
+        data: currPost,
+        url: "/posts",
+        success: function (data) {
+            console.log("server: " + data);
 
-        currThis.renderMarkers(currThis.posts);
-        currThis._renderPosts();
-        clicked = false;
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-          console.log(textStatus);
-      }
+            console.log("data" + data);
+            currThis.posts.push(data);
+
+            currThis.renderMarkers(currThis.posts);
+            currThis._renderPosts();
+            clicked = false;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
     });
 }
 
@@ -99,7 +99,7 @@ Posts.prototype.deletePost = function (index) {
     deleteMarker(postId);
     $.ajax({
 
-        method: "DELETE",        
+        method: "DELETE",
         url: "/posts/" + postId,
         success: function (data) {
             console.log(data);
@@ -121,36 +121,58 @@ $('#addpost').on('click', function (event) {
 
     event.preventDefault();
     var currName = "Anonymous";
-/*     escape(document.getElementById('post-name').value);
-    escape(document.getElementById('post-text').value); */
- 
+    /*     escape(document.getElementById('post-name').value);
+        escape(document.getElementById('post-text').value); */
+
     var $nameInput = $('#post-name');
     var $textInput = $('#post-text');
- 
+
     var latlng = marker.getPosition();
     var location = [];
- 
+
     location.push(latlng.lat());
     location.push(latlng.lng());
- 
-    if ($textInput.val()=== "") {
+
+    if ($textInput.val() === "") {
         alert("Please insert text!");
     }
     else {
-        if ($nameInput.val() !== ""){
+        if ($nameInput.val() !== "") {
             currName = $nameInput.val();
         }
         app.addPost(currName, $textInput.val(), location);
         $nameInput.val('');
         $textInput.val('');
     }
- });
+});
 
 $(".posts").on('click', '.remove-post', function () {
     var index = $(this).closest('.post').index();
     app.deletePost(index);
 });
 
-$('.btn-submit').on('click', function (event){
-    $('.post-form').removeClass('show'); 
+$('.btn-submit').on('click', function (event) {
+    $('.post-form').removeClass('show');
+});
+
+$posts.on('click', '.edit-post', function () {
+    var id = $(this).closest('div.post').data().id;
+    var $link = $(this).closest('div.post').find('a#' + id);
+    $link.toggleClass('editable editable-click')
+    if ($link.data().disabled) {
+        $link.data('disabled', false);
+        $link.editable('option', 'disabled', false);
+        $link.css('cursor', 'pointer')
+        $link.editable({
+            success: function () {
+                app.fetch();
+                $link.css('cursor', 'default');
+            }
+        })
+    } else {
+        $link.data('disabled', true);
+        $link.editable('option', 'disabled', true);
+        $link.css('cursor', 'default')
+        $link.removeClass('editable editable-click');
+    }
 });

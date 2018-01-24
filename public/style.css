@@ -18,6 +18,10 @@ ul li {
     margin: -0.5em -0.5em 0em 0em;
     float: right;
 }
+.btn-warning {
+    margin: -0.5em 0.2em 0em 0em;
+    float: right;
+}
 
 /*map*/
 #map {
@@ -91,4 +95,9 @@ ul li {
 
 .show{
     display: block;
+}
+
+a, a:hover {
+    color: black;
+    text-decoration: none;
 }

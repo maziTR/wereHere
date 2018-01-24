@@ -68,6 +68,17 @@ app.post('/posts', function (req, res) {
   });
 }); 
 
+app.put('/posts/:idPost', function (req, res) {
+  var idPost = req.params.idPost;
+  var text = req.body;
+
+  Post.findById(idPost, function (err, post) {
+    post.text = text.value;
+    post.save();
+    res.send(post);
+  }
+  )
+});
 
 
 app.listen(process.env.PORT || '8080', function () {
