@@ -26,10 +26,11 @@ function initMap() {
 }
 
 var form = document.getElementById('form').innerHTML
-
+// escape(document.getElementById('post-name').value);
+// escape(document.getElementById('post-text').value);
 function attachPosts(marker, post) {
     var infowindow = new google.maps.InfoWindow({
-        content: form + '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
+        content: '<form class="post-form">'+form + '</form><hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
     });
 
     marker.addListener('click', function () {

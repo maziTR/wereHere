@@ -25,15 +25,17 @@ function getMarkers(res) {
 };
 
 Posts.prototype.fetch = function () {
-
+    currThis = this;
     $.ajax({
+
         method: "GET",
         url: "/posts",
         dataType: 'json',
         success: function (res) {
             getMarkers(res);
-            app = res;
-            app._renderPosts();
+            currThis.posts = res;
+            currThis._renderPosts();
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus);
@@ -73,32 +75,74 @@ Posts.prototype._renderPosts = function () {
     }
 }
 
+Posts.prototype.deletePost = function (index) {
+
+    var postId = this.posts[index]._id;
+    console.log(postId);
+    var currThis = this;
+
+    $.ajax({
+
+        method: "DELETE",        
+        url: "/posts/" + postId,
+        success: function (data) {
+            console.log(data);
+            currThis.posts.splice(index, 1);
+            currThis.fetch();
+            currThis._renderPosts();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+}
+
 var app = new Posts();
 app.fetch();
 
-
 //events
+
 $('#map').on('click','#addpost', function (event) {
+    
     event.preventDefault();
     var currName = "Anonymous";
-    var $nameInput = escape(document.getElementById('post-name').value);
-    var $textInput = escape(document.getElementById('post-text').value);
+    // escape(document.getElementById('post-name').value);
+    // escape(document.getElementById('post-text').value);
+ 
+    var $nameInput = $(this).closest('#post-form').find('#post-name');
+    var $textInput = $(this).closest('#post-form').find('#post-text');
+    console.log(marker);
 
-    var latlng = this.marker.getPosition();
     var location = [];
 
-    location.push(latlng.lat());
-    location.push(latlng.lng());
+    if (marker == undefined){
+        location.push([32.063567, 34.773053 ]);
+    }
+    else{
+        var latlng = marker.getPosition();
+        location.push(latlng.lat());
+        location.push(latlng.lng());
+    }
 
-    if ($textInput === "") {
+ 
+
+ 
+    if ($textInput.val()=== "") {
         alert("Please insert text!");
     }
     else {
-        if ($nameInput !== "") {
-            currName = $nameInput;
+        if ($nameInput.val() !== ""){
+            currName = $nameInput.val();
         }
-        app.addPost(currName, $textInput, location);
-        $nameInput = "";
-        $textInput = "";
+        app.addPost(currName, $textInput.val(), location);
+        $nameInput.val('');
+        $textInput.val('');
     }
-})
+ });
+
+$(".posts").on('click', '.remove-post', function () {
+    var index = $(this).closest('.post').index();
+    console.log(index);
+    app.deletePost(index);
+});
+
