@@ -4,7 +4,11 @@ var Posts = function () {
     this.posts = {};
 };
 
+<<<<<<< HEAD
 function getMarkers(res) {
+=======
+Posts.prototype.renderMarkers = function(res) {
+>>>>>>> 9c72012d434becfc3a855b714fe930ff446a7192
     for (var i = 0, len = res.length; i < len; i++) {
         var fetch = res[i];
 
@@ -25,15 +29,20 @@ function getMarkers(res) {
 };
 
 Posts.prototype.fetch = function () {
+
+Posts.prototype.fetch = function () {
     currThis = this;
     $.ajax({
 
         method: "GET",
         url: "/posts",
-        dataType: 'json',
-        success: function (res) {
-            getMarkers(res);
-            currThis.posts = res;
+        success: function (data) {
+
+            currThis.posts = data;
+            console.log("data" + data);
+            console.log("posts from fetch" + currThis.posts);
+           
+            currThis.renderMarkers(data);
             currThis._renderPosts();
 
         },

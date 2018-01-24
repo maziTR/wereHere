@@ -26,11 +26,10 @@ function initMap() {
 }
 
 var form = document.getElementById('form').innerHTML
-// escape(document.getElementById('post-name').value);
-// escape(document.getElementById('post-text').value);
+
 function attachPosts(marker, post) {
     var infowindow = new google.maps.InfoWindow({
-        content: '<form class="post-form">'+form + '</form><hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
+        content: form + '<hr><h6>' + post.name + '</h6><br><p>' + post.text + '</p><br><hr>'
     });
 
     marker.addListener('click', function () {
@@ -48,11 +47,13 @@ function attachPosts(marker, post) {
 
     /* var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
         '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
-
     downloadUrl(url, function (data, responseCode) {
-
         if (responseCode == 200 && data.length <= 1) {
             infowindow.close();
             messagewindow.open(map, marker);
         }
+<<<<<<< HEAD
     })*/
+=======
+    })*/
+>>>>>>> 9c72012d434becfc3a855b714fe930ff446a7192
