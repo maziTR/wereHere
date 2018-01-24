@@ -18,7 +18,7 @@ var coordinatesSchema = new Schema({
 
 var locationSchema = new Schema({
   type: String,
-  coordinates: [coordinatesSchema]
+  coordinates: []
 });
 
   var postSchema = new Schema({
