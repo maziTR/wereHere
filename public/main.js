@@ -84,32 +84,34 @@ app.fetch();
 
 //events
 
-
 $('#addpost').on('click', function () {
+
     event.preventDefault();
     var currName = "Anonymous";
-    var $nameInput = escape(document.getElementById('post-name').value);
-    var $textInput = escape(document.getElementById('post-text').value);
-
+    escape(document.getElementById('post-name').value);
+    escape(document.getElementById('post-text').value);
+ 
+    var $nameInput = $('#post-name');
+    var $textInput = $('#post-text');
+ 
     var latlng = marker.getPosition();
     var location = [];
-
+ 
     location.push(latlng.lat());
     location.push(latlng.lng());
-
-    if ($textInput=== "") {
+ 
+    if ($textInput.val()=== "") {
         alert("Please insert text!");
     }
     else {
-        if ($nameInput !== ""){
-            currName = $nameInput;
+        if ($nameInput.val() !== ""){
+            currName = $nameInput.val();
         }
-        app.addPost(currName, $textInput, location);
-        $nameInput = "";
-        $textInput = "";
+        app.addPost(currName, $textInput.val(), location);
+        $nameInput.val('');
+        $textInput.val('');
     }
-});
-
+ });
 
 $(".posts").on('click', '.remove-post', function () {
     var index = $(this).closest('.post').index();
