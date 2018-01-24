@@ -110,15 +110,9 @@ $('#addpost').on('click', function () {
 });
 
 
-// $(".posts").on('click', '.remove-post', function () {
-//     var index = $(this).closest('.post').index();
-//     console.log(index);
-//     app.deletePost(index);
-// });
-
-
-$('.remove-post').on('click', function () {
+$(".posts").on('click', '.remove-post', function () {
     var index = $(this).closest('.post').index();
     console.log(index);
     app.deletePost(index);
 });
+
