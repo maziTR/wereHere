@@ -14,7 +14,8 @@ ul li {
 }
 
 .btn-danger {
-    margin: 5px 0 5px 10px;
+    margin: -0.5em -0.5em 0em 0em;
+    float: right;
 }
 
 /*map*/
@@ -60,11 +61,23 @@ ul li {
 
 /*post div*/
 .posts {
-    height: 26em;
-    overflow-y: scroll;
+     max-height: 26.15em;
+     overflow: auto;
 }
 
 /* general */
+
+.page-header img {
+    margin: 0 auto;
+    display: block;
+}
+
+.row {
+    min-height: 40em;
+    background: #00bcd4b3;
+    height: 39.7em;
+    border-radius: 1.5em 0em;
+}
 
 .show{
     display: block;
