@@ -25,6 +25,7 @@ Posts.prototype.fetch = function () {
     });
 }
 
+
 Posts.prototype.addPost = function (name, text, loc) {
 
 var currPost = {name: name, text:text, location: loc};
