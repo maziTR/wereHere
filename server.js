@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Post = require('./models/postModel');
 
 mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost/wereHereDB', {
-  /* useMongoClient: true */
+  useMongoClient: true
 }, function (err, db) {
   if (err) {
     return console.error(err);
