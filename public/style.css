@@ -32,12 +32,6 @@ input{
     margin-bottom: 0.5em;
 }
 
-h4 {
-    text-align: center;
-    color: #000980;
-    font-size: 1.3em;
-}
-
 /*map*/
 #map {
     height: 500px;
@@ -47,10 +41,10 @@ h4 {
 }
 
 .map-marker-txts{
-    background: #595f53;
+    background: #ececec;
     font-size:larger;
     padding:1em;
-    color:white;
+    color: #1f0e0e;
     border-radius:0.5em 0;
 }
 
@@ -60,21 +54,15 @@ h4 {
 
 h4.map-press {
     position: absolute;
-    background: #5162a2ed;
+    background: #6b6b6bed;
     border-radius: 2em;
-    padding: 1em;
-    z-index: 1;
+    padding: 0.5em 1.5em 2em 1.5em;
+    /* z-index: 1; */
     color: white;
     /* margin: 0 auto; */
     right: 32%;
-    top: 48%;
+    top: -3%;
 }
-
-/* first action btn*/
-.map-press{
-    display: none;
-}
-
 
 /*adding post form*/
 .post-form {
@@ -94,6 +82,14 @@ h4.map-press {
 .col-sm-9, .col-md-9{
     height: -webkit-fill-available;
     position: relative;
+}
+
+/*post div*/
+.posts {
+     max-height: 22em;
+     padding: 1em;
+     overflow: auto;
+     /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 /* general */
@@ -121,14 +117,7 @@ h4.map-press {
     float: right;
 }
 
-/*posts*/
-
-.posts {
-    max-height: 22em;
-    padding: 1em;
-    overflow: auto;
-}
-
+/*post*/
 .post {
     position: relative;
     background: #ffffff66;
@@ -139,7 +128,7 @@ h4.map-press {
     position: absolute;
     right: 1em;
     top: 1em;
-    padding-top: 0.65em;
+    /* padding-top: 0.5em; */
     color: #e6360c;
     font-weight: bold;
 }
@@ -147,7 +136,7 @@ h4.map-press {
 .person-text {
     width: 80%;
     font-size: 1.2em;
-    color: #0e2567;
+    color: #252525;
     font-style: oblique;
 }
 
@@ -156,7 +145,17 @@ h4.map-press {
     font-size: 1.2em;
 }
 
-/*scroll bar*/
+.map-press{
+    display: none;
+}
+
+h4 {
+    text-align: center;
+    color: #000980;
+    font-size: 1.3em;
+}
+
+
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -171,7 +170,6 @@ h4.map-press {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
-/*general*/
 .show{
     display: block;
 }
