@@ -58,7 +58,7 @@ app.post('/posts', function (req, res) {
 });
 
 //to handle deleting a post
- app.delete('/posts/:id', function (req, res) {
+app.delete('/posts/:id', function (req, res) {
   Post.findByIdAndRemove(req.params.id, function (err, post) {
     if (err) {
       res.send(err);
@@ -66,9 +66,7 @@ app.post('/posts', function (req, res) {
     }
     res.send(post);
   });
-}); 
-
-
+});
 
 app.listen(process.env.PORT || '8080', function () {
   console.log("server alive");

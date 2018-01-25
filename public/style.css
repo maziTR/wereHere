@@ -82,10 +82,13 @@ ul li {
     min-height: 40em;
     background: #ffffff42;
     height: 37.7em;
-    vertical-align: middle;
     border-radius: 1.5em 0em;
     margin-top: 2em;
     display: block;
+}
+
+.close-form {
+    float: right;
 }
 
 .show{

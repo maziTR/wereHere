@@ -3,9 +3,15 @@ var marker;
 var infowindow;
 var messagewindow;
 var clicked = false;
+var markers = [];
 
 function initMap() {
-    var telAviv = { lat: 32.063567, lng: 34.773053 }
+
+    var telAviv = {
+        lat: 32.063567,
+        lng: 34.773053
+    }
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: telAviv,
         zoom: 15,
@@ -16,6 +22,7 @@ function initMap() {
         minZoom: 15
 
     });
+
     var bounds = new google.maps.LatLngBounds();
 
     bounds.extend(new google.maps.LatLng('32.051772', '34.750975'));
@@ -23,48 +30,37 @@ function initMap() {
 
     map.fitBounds(bounds);
 
-    /*     infowindow = new google.maps.InfoWindow({
-            content: document.getElementById('form')
-        }); */
-
     google.maps.event.addListener(map, 'click', function (event) {
         if (!clicked) {
             marker = new google.maps.Marker({
                 position: event.latLng,
                 map: map
             });
+            markers.push(marker);
             $('.post-form').addClass('show');
             clicked = true;
-        } else {
+        } 
+        else {
 
             //when pressing on new marker 
             marker.addListener('click', function () {
-                /*             infowindow.open(marker.get('map'), marker);*/
                 if (!(infowindow)) {
                     $('.post-form').addClass('show');
-                }
-                else {
+                } else {
                     infowindow.open(marker.get('map'), marker);
                 }
             })
-    }
+        }
     });
 };
-    /* 
-            infowindow = new google.maps.InfoWindow({
-                content: document.getElementById('form')
-            })  */
 
+function attachPosts(marker, post) {
+    var infowindow = new google.maps.InfoWindow({
+        content: '<div class="map-marker-txts"><div class="person-name">' + post.name + '</div><div class="person-text">' + post.text + '</div></div>'
+    });
 
-    function attachPosts(marker, post) {
-        /* console.log(marker); */
-        var infowindow = new google.maps.InfoWindow({
-            content: '<div class="map-marker-txts"><div class="person-name">' + post.name + '</div><div class="person-text">' + post.text + '</div></div>'
-        });
-        //when pressing on a existing marker
-
-        marker.addListener('click', function () {
-            infowindow.open(marker.get('map'), marker);
-        });
-    }
-
+    //when pressing on a existing marker
+    marker.addListener('click', function () {
+        infowindow.open(marker.get('map'), marker);
+    });
+}
