@@ -43,7 +43,6 @@ function initMap() {
             clicked = true;
         } 
         else {
-
             //when pressing on new marker 
             marker.addListener('click', function () {
                 if (!(infowindow)) {
