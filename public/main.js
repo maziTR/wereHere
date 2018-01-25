@@ -1,12 +1,15 @@
 var $posts = $(".posts");
 var Posts = function () {
     this.posts = [];
+    this.markers = [];
 };
-$.fn.editable.defaults.ajaxOptions = { type: "PUT" }
-function deleteMarker(id) {
-    for (let i = 0; i < app.posts.length; i++) {
-        if (app.posts[i]._id === id) {
-            app.posts[i].setMap(null);
+
+Posts.prototype.deleteMarker = function(id) {
+    for (let i = 0; i < this.markers.length; i++){
+        if (this.markers[i].id === id){
+            this.markers[i].setMap(null);
+            this.markers[i] = null;
+            this.markers.splice(i, 1);
         }
     }
 }
@@ -14,10 +17,10 @@ function deleteMarker(id) {
 Posts.prototype.renderMarkers = function (res) {
     for (var i = 0; i < res.length; i++) {
         var resource = res[i];
-
+        //check if marker exists
         if (this.hasOwnProperty(resource._id)) {
             this[resource._id].setPosition(new google.maps.LatLng(resource.location.coordinates[0].lng, resource.location.coordinates[0].lat));
-        } else {
+        } else { //make new marker if doesnt exist
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(resource.location.coordinates[0].lng, resource.location.coordinates[0].lat),
                 name: resource.name,
@@ -25,7 +28,8 @@ Posts.prototype.renderMarkers = function (res) {
                 map: map,
                 clickable: true
             });
-            marker.id = resource._id
+            marker.id = resource._id;
+            this.markers.push(marker);
             console.log(marker);
         }
         attachPosts(marker, res[i]);
@@ -96,14 +100,15 @@ Posts.prototype.deletePost = function (index) {
     var postId = this.posts[index]._id;
     console.log(postId);
     var currThis = this;
-    deleteMarker(postId);
+    currThis.deleteMarker(postId);
     $.ajax({
-
-        method: "DELETE",
+        method: "DELETE",        
         url: "/posts/" + postId,
         success: function (data) {
             console.log(data);
+            // currThis.deleteMarker(postId);
             currThis.posts.splice(index, 1);
+            currThis.renderMarkers(currThis.posts);
             currThis._renderPosts();
         },
         error: function (jqXHR, textStatus, errorThrown) {
