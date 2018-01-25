@@ -7,25 +7,6 @@
     <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script type="text/javascript">
-        if (document.readyState === "complete") {
-            window.setTimeout(jQuery.ready);
-        }
-        else if (document.readyState === "interactive") {
-            document.onreadystatechange = function () {
-                if (document.readyState == "complete") {
-                    window.setTimeout(jQuery.ready);
-                }
-            }
-        }
-        else {
-            document.addEventListener("DOMContentLoaded", function () {
-                window.DOMLoaded = true;
-            });
-
-            window.addEventListener("load", completed);
-        }
-    </script>
     <title>Were here</title>
 </head>
 
@@ -65,7 +46,7 @@
     </script>
 
     <script src="jquery/dist/jquery.js"></script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSux_Xs8wpmGgxS9DVmT0lzu0gJF8Brg0&callback=initMap"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSux_Xs8wpmGgxS9DVmT0lzu0gJF8Brg0&callback=initMap"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="handlebars/dist/handlebars.js"></script>
     <script src="bootstrap-editable/js/index.js"></script>
