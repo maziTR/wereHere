@@ -70,12 +70,13 @@ app.delete('/posts/:id', function (req, res) {
 
 app.put('/posts/:idPost', function (req, res) {
   var idPost = req.params.idPost;
-  var text = req.body;
-
+  var text = req.body.value;
+  console.log('this is req.body.text ' + text)
   Post.findById(idPost, function (err, post) {
-    post.text = text.value;
+    post.text = text;
     post.save();
-    res.send(post);
+    console.log('this is post.text ' + post.text)
+    res.send(post.text);
   }
   )
 });
