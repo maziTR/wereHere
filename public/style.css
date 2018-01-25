@@ -25,7 +25,7 @@ ul li {
     color: #e6360c;
     background-color: #9a9a9a7a;
     border-color: #ac292500;
-    border-radius: 20%;
+    border-radius: 0.6em 0em;
 }
 
 input{
@@ -105,7 +105,8 @@ h4.map-press {
 }
 
 .row {
-    min-height: 39em;
+    min-height: 41em;
+    padding-top: 2em;
     background: #ffffff42;
     height: 39em;
     border-radius: 1.5em 0em;
@@ -120,6 +121,7 @@ h4.map-press {
 /*post*/
 .post {
     position: relative;
+    border-radius: 1em 0em;
     background: #ffffff66;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
