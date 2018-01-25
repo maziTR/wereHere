@@ -38,6 +38,8 @@ function initMap() {
             });
             markers.push(marker);
             $('.post-form').addClass('show');
+            $('.map-press').removeClass('show');
+            
             clicked = true;
         } 
         else {

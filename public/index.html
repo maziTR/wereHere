@@ -16,9 +16,11 @@
                 <div class="page-header">
                     <img src="img/logo.png" alt="Were here app logo">
                 </div>
+                <h4>Recent posts in this location</h4>
                 <div class="posts"></div>
             </div>
             <div class="col-md-9 col-sm-9 col-xs-9 info-clm">
+                <h4 class="map-press show">press on the map to add a new post</h4>
                 <div id="map"></div>
                 <div class="posts-container">
                     <form class="post-form">
@@ -36,7 +38,8 @@
     </div>
 
     <script id="post-template" type="text/x-handlebars-template">
-        <div class="post well well-sm" data-id="{{_id}}"> {{name}} - {{text}}
+        <div class="post well well-sm" data-id="{{_id}}">
+                <div class="person-name post-name">{{name}}</div><div class="person-text post-txt">{{text}}</div>
             <button type="button" class="btn btn-danger remove-post">X</button>
         </div>
     </script>
@@ -44,7 +47,6 @@
     <script src="jquery/dist/jquery.js"></script>
     <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="handlebars/dist/handlebars.js"></script>
-    <script src="googleAPIclient.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSux_Xs8wpmGgxS9DVmT0lzu0gJF8Brg0&callback=initMap"></script>
     <script src="googleAPIclient.js"></script>
     <script src="main.js"></script>

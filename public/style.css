@@ -17,6 +17,19 @@ ul li {
 .btn-danger {
     margin: -0.5em -0.5em 0em 0em;
     float: right;
+    background-color: #7fffd400;
+    border: #00ffff00;
+}
+
+.btn-danger:hover {
+    color: #e6360c;
+    background-color: #9a9a9a7a;
+    border-color: #ac292500;
+    border-radius: 20%;
+}
+
+input{
+    margin-bottom: 0.5em;
 }
 
 /*map*/
@@ -39,7 +52,17 @@ ul li {
     font-size:1.6em;
 }
 
-
+h4.map-press {
+    position: absolute;
+    background: #5162a2ed;
+    border-radius: 2em;
+    padding: 1em;
+    z-index: 1;
+    color: white;
+    /* margin: 0 auto; */
+    right: 32%;
+    top: 48%;
+}
 
 /*adding post form*/
 .post-form {
@@ -58,12 +81,14 @@ ul li {
 
 .col-sm-9, .col-md-9{
     height: -webkit-fill-available;
+    position: relative;
 }
 
 /*post div*/
 .posts {
      max-height: 26.15em;
      overflow: auto;
+     /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 /* general */
@@ -89,6 +114,42 @@ ul li {
 
 .close-form {
     float: right;
+}
+
+/*post*/
+.post {
+    position: relative;
+    background: #ffffff66;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.remove-post {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    color: #e6360c;
+    font-weight: bold;
+}
+
+.person-text {
+    width: 80%;
+    font-size: 1.2em;
+    color: #0e2567;
+    font-style: oblique;
+}
+
+.person-name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.map-press{
+    display: none;
+}
+
+h4 {
+    text-align: center;
+    color: #000980;
 }
 
 .show{
