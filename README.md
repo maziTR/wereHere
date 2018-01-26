@@ -8,10 +8,12 @@ the users can add new posts, and delete posts from the map.
 
 <h3>future features that will be added:</h3>
 <p>
-* user authentication
-* geolocation based map (for now the map is only of Tel Aviv)
-* sorting posts by current map
-* updating posts
+<ul>
+  <li>user authentication</li>
+  <li>geolocation based map (for now the map is only of Tel Aviv)</li>
+  <li>sorting posts by current map</li>
+  <li>updating posts</li>
+</ul>
 </p>
 
 <p>
