@@ -17,5 +17,5 @@ the users can add new posts, and delete posts from the map.
 </p>
 
 <p>
-This project was made with Google maps API, Node js, Express, Mongodb and more.
+This project was made with Google maps API, Node js, Express, MongoDB and more.
 </p>
